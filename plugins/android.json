@@ -1,0 +1,45 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-email-composer": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.kanalfrontend585842"
+        }
+    },
+    "dependent_plugins": {}
+}

@@ -1,0 +1,87 @@
+﻿<ion-view view-title="Cafe Kanal" ng-controller="ChannelsCtrl">
+    <ion-content  >
+        <div class="bar bar-subheader bar-stable static text-center">
+            <strong class="title">New Channel</strong>
+        </div>
+        <div class="im-wrapper">
+
+            <form name="newChannelForm"  novalidate >
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <button class="button button-clear"   ng-click="chooseUploadPhotoMethod()" >
+
+                        </button>
+                        <img src="img/channel.jpg"  class="" style="width:30%;height:30%" />
+                    </label>
+                    <div class="row">
+                        <div class="column col-90">
+                            <label class="item item-input item-floating-label"
+                                   ng-class="{ 'has-errors' : newChannelForm.channelName.$invalid, 'no-errors' : newChannelForm.channelName.$valid}">
+                                <span class="input-label">Channel address</span>
+                                <input name="channelName" ng-change="isChannelNameUnique()" type="text"
+                                       placeholder="Channel Address"
+                                       ng-model="channel.name"  ng-minlength="3" ng-maxlength="20" required >
+                            </label>
+                            <div class="error" ng-show="channelNameAlreadyExistsMsg.length > 0">
+                                <i class="ion-information-circled"></i>
+                                {{channelNameAlreadyExistsMsg}}
+                            </div>
+                            <div class="error-container" ng-show="newChannelForm.channelName.$error" ng-messages="newChannelForm.channelName.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+                        </div>
+                        <div class="column .col-10 col-center">
+                            <span id="channelNameStatusIcon" ng-class="channelNameStatusIconClass" class="icon"></span>
+                        </div>
+                    </div>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Name</span>
+                        <input name="channelTitle"  type="text" placeholder="Name"
+                               ng-model="channel.title" ng-minlength="3" ng-maxlength="20" required>
+                    </label>
+                    <div class="error-container" ng-show="newChannelForm.channelTitle.$error" ng-messages="newChannelForm.channelTitle.$error">
+                        <div ng-messages-include="error-list.html"></div>
+                    </div>
+
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Description</span>
+                        <textarea type="text" placeholder="Description" ng-model="channel.desc" ></textarea>
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">Channel Type</span>
+                        <select name="channelType" ng-model="channel.type" required >
+                            <option value="1">General</option>
+                        </select>
+                    </label>
+                    <div class="error-container" ng-show="newChannelForm.channelType.$error" ng-messages="newChannelForm.channelType.$error">
+                        <div ng-messages-include="error-list.html"></div>
+                    </div>
+                </div>
+
+                <script id="error-list.html" type="text/ng-template">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>
+                    <div class="error" ng-message="minlength">
+                        <i class="ion-information-circled"></i>
+                        Minimum length of this field is 3 characters!
+                    </div>
+                    <div class="error" ng-message="maxlength">
+                        <i class="ion-information-circled"></i>
+                        Maximum length of this field is 20 characters!
+                    </div>
+                </script>
+
+                <div class="padding">
+                    <button type="button" ng-click="saveNewChannel()" ng-disabled="newChannelForm.$invalid"
+                            class="button button-block button-dark">Create Channel</button>
+                </div>
+
+            </form>
+        </div>
+
+    </ion-content>
+
+</ion-view>

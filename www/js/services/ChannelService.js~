@@ -1,0 +1,26 @@
+app.factory('ChannelService',['$http',function($http){
+
+   function getChannels(){
+        return  $http.get('http://localhost:8080/channels/list').then(function(response){
+                    return response.data;                            
+        });
+    };
+        
+	function isChannelNameUnique(channelName){
+		return $http.get("http://localhost:8080/channels/alreadyExistsChannelName?name=" + channelName).then(function(response){
+
+			return response.data;
+		});
+	};
+        
+        
+        
+        
+        
+        
+        
+        return {
+        	getChannels : getChannels,
+        	isChannelNameUnique : isChannelNameUnique	
+        }
+}]);

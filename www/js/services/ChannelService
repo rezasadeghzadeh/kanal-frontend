@@ -1,0 +1,10 @@
+app.factory('webServices',['$http',function($http){
+        return {
+            getChannels : function(){
+                return  $http.get('http://localhost:8080/channels/list').then(function(response){
+                	console.log(response); 
+                            return response.data;                            
+                });
+            }
+        }
+}]);

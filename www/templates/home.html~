@@ -1,0 +1,19 @@
+﻿<ion-view view-title="کافه کانال" ng-controller="HomeCtrl">
+    <ion-content>
+            <div class="bar bar-subheader bar-stable static text-center">
+                <strong class="title">Special Channel</strong>
+            </div>
+        <div class="im-wrapper">
+            <ion-list>
+                <ion-item ng-repeat="channel in channels" class="item-thumbnail-left">
+                    <img src="{{channel.Images.ThumbnailPath}}">
+
+                    <h2>{{channel.Title}}</h2>
+
+                    <p>{{channel.Description}}</p>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+
+</ion-view>
