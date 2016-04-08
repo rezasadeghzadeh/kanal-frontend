@@ -27,6 +27,7 @@ app.run(function ($ionicPlatform) {
 })
 
 app.config(function ($stateProvider, $urlRouterProvider) {
+
     $stateProvider
 
     .state('app', {
@@ -43,8 +44,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 templateUrl: 'templates/home.html',
                 controller: 'HomeCtrl',
             }
-        }               
-
+        },
+       onEnter : function($state,AuthService,$ionicSideMenuDelegate){
+            if(!AuthService.isAuthenticated()){
+                $ionicSideMenuDelegate.canDragContent(false);
+                $state.go('app.login');
+            }
+        }
     })
     
    .state('app.newChannel', {
@@ -58,11 +64,49 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     })
 
+        .state('app.login', {
+            url: '/login',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/login.html',
+                    controller: 'AuthCtrl',
+                }
+            }
+
+        })
+
+    .state('app.enterSmsText', {
+        url: '/enterSmsText/:mobileNumber',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/enterSmsText.html',
+                controller: 'AuthCtrl',
+            }
+        }
+    })
+
+        .state('app.enterUserInfo', {
+            url: '/enterUserInfo/:mobileNumber',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/enterUserInfo.html',
+                    controller: 'AuthCtrl',
+                }
+            }
+        })
+
+
 
     ;
-
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise("/app/home");
+/*
+    $urlRouterProvider.otherwise(function($injector, $location){
+        var $state = $injector.get("$state");
+        $state.go('app.home');
+    });
+*/
+
 });
 
 

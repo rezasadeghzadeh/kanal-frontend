@@ -1,6 +1,6 @@
-angular.module('starter')
 
-.factory('ImageService', function($cordovaCamera, FileService, $q, $cordovaFile) {
+
+app.factory('ImageService', function($cordovaCamera, FileService, $q, $cordovaFile) {
  
   function makeid() {
     var text = '';

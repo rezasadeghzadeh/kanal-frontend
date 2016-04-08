@@ -13,11 +13,13 @@
                         </button>
                         <img src="img/channel.jpg"  class="" style="width:30%;height:30%" />
                     </label>
+
                     <div class="row">
                         <div class="column col-90">
                             <label class="item item-input item-floating-label"
                                    ng-class="{ 'has-errors' : newChannelForm.channelName.$invalid, 'no-errors' : newChannelForm.channelName.$valid}">
                                 <span class="input-label">Channel address</span>
+
                                 <input name="channelName" ng-change="isChannelNameUnique()" type="text"
                                        placeholder="Channel Address"
                                        ng-model="channel.name"  ng-minlength="3" ng-maxlength="20" required >

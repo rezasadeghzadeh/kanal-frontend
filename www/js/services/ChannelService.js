@@ -1,9 +1,7 @@
 app.factory('ChannelService', ['$http', function ($http) {
 
     function getChannels() {
-        return $http.get('http://localhost:8080/channels/list').then(function (response) {
-            return response.data;
-        });
+        return $http.get('http://localhost:8080/channels/list');
     };
 
     function isChannelNameUnique(channelName) {
