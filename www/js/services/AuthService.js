@@ -1,4 +1,4 @@
-    app.service('AuthService', function($q, $http, USER_ROLES) {
+    app.service('AuthService', function($q, $http, USER_ROLES,CONFIG) {
         var LOCAL_TOKEN_KEY = 'LOCAL_TOKEN_KEY';
         var mobileNumber = '';
         var isAuthenticated = false;
@@ -38,14 +38,16 @@
         };
 
         function sendSmsVerification(mobileNumber){
-            return $http.post('http://localhost:8080/smsVerification/send', {
-                mobileNumber: mobileNumber
+            return $http({
+                url: CONFIG.baseAddress + '/smsVerification/send',
+                method: "GET",
+                params: {mobileNumber: mobileNumber}
             });
         }
 
         function verifySentSms(mobileNumber,enteredText){
             return $http({
-                url: "http://localhost:8080/smsVerification/verify",
+                url: CONFIG.baseAddress + "/smsVerification/verify",
                 method: "GET",
                 params: {mobileNumber: mobileNumber,enteredText : enteredText}
             });
@@ -53,7 +55,7 @@
 
         function updateUserInfo( mobileNumber, email, firstName,lastName){
             req = $http({
-                url : "http://localhost:8080/user/updateAndGetToken",
+                url :CONFIG.baseAddress + "/user/updateAndGetToken",
                 method: "GET",
                 params: {mobileNumber: mobileNumber,firstName: firstName, lastName: lastName, email : email}
             });

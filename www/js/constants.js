@@ -9,6 +9,7 @@
     });
 
     app.constant("CONFIG",{
-        title: 'Cafe Kanal'
+        title: 'Cafe Kanal',
+        baseAddress : 'http://192.168.177.103:8080'
     });
 

@@ -1,11 +1,11 @@
-app.factory('ChannelService', ['$http', function ($http) {
+app.service('ChannelService', function ($http,CONFIG) {
 
     function getChannels() {
-        return $http.get('http://localhost:8080/channels/list');
+        return $http.get(CONFIG.baseAddress + '/channels/list');
     };
 
     function isChannelNameUnique(channelName) {
-        return $http.get("http://localhost:8080/channels/alreadyExistsChannelName?name=" + channelName).then(function (response) {
+        return $http.get( CONFIG.baseAddress + "/channels/alreadyExistsChannelName?name=" + channelName).then(function (response) {
             return response.data;
         }, function () {
             return -1;
@@ -13,7 +13,7 @@ app.factory('ChannelService', ['$http', function ($http) {
     };
 
     function saveNewChannel(name,title,type,desc) {
-        return $http.post('http://localhost:8080/channels/saveNewChannel', {
+        return $http.post(CONFIG.baseAddress + '/channels/saveNewChannel', {
             name: name,
             title:title,
             channelType: type,
@@ -33,4 +33,4 @@ app.factory('ChannelService', ['$http', function ($http) {
         saveNewChannel: saveNewChannel,
         testF : testFunc
     }
-}]);
+});

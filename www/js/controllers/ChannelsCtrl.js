@@ -1,4 +1,4 @@
-app.controller("ChannelsCtrl", function ($scope, $cordovaFileTransfer, $ionicActionSheet, ionicToast, ImageService, ChannelService) {
+app.controller("ChannelsCtrl", function ($scope, $cordovaFileTransfer, $ionicActionSheet, ionicToast, ImageService, ChannelService,CONFIG) {
     $scope.channel = {};
     $scope.upload = function () {
         var options = {
@@ -8,7 +8,7 @@ app.controller("ChannelsCtrl", function ($scope, $cordovaFileTransfer, $ionicAct
             mimeType: "image/png"
         };
 
-        $cordovaFileTransfer.upload("http://127.0.0.1:8080/file/upload", "/home/reza/Pictures/image_013.jpeg", options).then(function (result) {
+        $cordovaFileTransfer.upload(CONFIG.baseAddress + "/file/upload", "/home/reza/Pictures/image_013.jpeg", options).then(function (result) {
             alert(JSON.stringify(result.response));
             console.log("SUCCESS: " + JSON.stringify(result.response));
         }, function (err) {
