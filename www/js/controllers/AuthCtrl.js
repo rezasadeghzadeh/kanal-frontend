@@ -33,7 +33,6 @@ app.controller("AuthCtrl", function ($scope,$state, $ionicPopup,ionicToast, Auth
         AuthService.sendSmsVerification($scope.data.mobileNumber).then(function(response){
             $state.go('app.enterSmsText',{mobileNumber: $scope.data.mobileNumber});
         },function(error){
-            alert(JSON.stringify(error));
             var alertPopup = $ionicPopup.alert({
                 title :'Error',
                 template : 'There was a problem on sending verfification sms,Please try again!'

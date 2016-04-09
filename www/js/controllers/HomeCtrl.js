@@ -3,6 +3,7 @@
     //call after load
     ChannelService.getChannels().then(function (response) {
         $scope.channels = response.data;
+    },function(error){
     });
     $scope.mobileNumber = AuthService.mobileNumber();
     //show message when the response has error
