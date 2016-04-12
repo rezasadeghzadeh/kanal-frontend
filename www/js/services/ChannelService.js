@@ -12,12 +12,13 @@ app.service('ChannelService', function ($http,CONFIG) {
         })
     };
 
-    function saveNewChannel(name,title,type,desc) {
+    function saveNewChannel(name,title,type,desc,imageUrl) {
         return $http.post(CONFIG.baseAddress + '/channels/saveNewChannel', {
             name: name,
             title:title,
             channelType: type,
-            description: desc
+            description: desc,
+            imageUrl:imageUrl,
         });
     };
 

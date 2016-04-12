@@ -55,6 +55,9 @@
                         <select name="channelType" ng-model="channel.type" required >
                             <option value="1">General</option>
                         </select>
+
+                        <input type="hidden" ng-model="channel.imageUrl" />
+
                     </label>
                     <div class="error-container" ng-show="newChannelForm.channelType.$error" ng-messages="newChannelForm.channelType.$error">
                         <div ng-messages-include="error-list.html"></div>
@@ -80,7 +83,6 @@
                     <button type="button" ng-click="saveNewChannel()" ng-disabled="newChannelForm.$invalid"
                             class="button button-block button-dark">Create Channel</button>
                 </div>
-
             </form>
         </div>
 

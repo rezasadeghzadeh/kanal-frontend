@@ -20,6 +20,7 @@ angular.module('starter')
   };
  
   return {
+
     storeImage: addImage,
     images: getImages
   }

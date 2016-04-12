@@ -71,7 +71,8 @@
             sendSmsVerification : sendSmsVerification,
             verifySentSms : verifySentSms,
             updateUserInfo : updateUserInfo,
-            storeUserCredentials: storeUserCredentials
+            storeUserCredentials: storeUserCredentials,
+            authToken : function(){return authToken}
         };
     })
 

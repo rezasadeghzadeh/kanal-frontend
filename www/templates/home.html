@@ -6,7 +6,7 @@
         <div class="im-wrapper">
             <ion-list>
                 <ion-item ng-repeat="channel in channels" class="item-thumbnail-left">
-                    <img src="{{channel.Images.ThumbnailPath}}">
+                    <img src="{{CONFIG.staticBaseAddress}}{{channel.ThumbnailUrl}}">
 
                     <h2>{{channel.Title}}</h2>
 

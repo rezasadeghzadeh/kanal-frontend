@@ -1,25 +1,5 @@
-app.controller("ChannelsCtrl", function ($scope, $cordovaFileTransfer, $ionicActionSheet, ionicToast, ImageService, ChannelService,CONFIG) {
+app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $ionicActionSheet, ionicToast, ImageService, ChannelService,CONFIG) {
     $scope.channel = {};
-    $scope.upload = function () {
-        var options = {
-            fileKey: "avatar",
-            fileName: "image.png",
-            chunkedMode: false,
-            mimeType: "image/png"
-        };
-
-        $cordovaFileTransfer.upload(CONFIG.baseAddress + "/file/upload", "/home/reza/Pictures/image_013.jpeg", options).then(function (result) {
-            alert(JSON.stringify(result.response));
-            console.log("SUCCESS: " + JSON.stringify(result.response));
-        }, function (err) {
-            console.log("ERROR: " + JSON.stringify(err));
-            alert(JSON.stringify(err));
-        }, function (progress) {
-
-            // constant progress updates
-        });
-    };
-
     $scope.chooseUploadPhotoMethod = function () {
         $scope.hideSheet = $ionicActionSheet.show({
             buttons: [
@@ -36,9 +16,11 @@ app.controller("ChannelsCtrl", function ($scope, $cordovaFileTransfer, $ionicAct
 
         $scope.addImage = function (type) {
             $scope.hideSheet();
-            ImageService.handleMediaDialog(type).then(function () {
-                $scope.$apply();
-            });
+            ImageService.handleMediaDialog(type).then(function (imageUrl) {
+                $scope.channel.imageUrl  =  imageUrl;
+            }),function(error){
+                console.log("ChannelCrtl error : " + error);
+            };
         }
     };
 
@@ -65,11 +47,11 @@ app.controller("ChannelsCtrl", function ($scope, $cordovaFileTransfer, $ionicAct
     };
 
     $scope.saveNewChannel  = function(){
-        ChannelService.saveNewChannel($scope.channel.name,$scope.channel.title,$scope.channel.type,$scope.channel.desc).then(function(response){
+        ChannelService.saveNewChannel($scope.channel.name,$scope.channel.title,$scope.channel.type,$scope.channel.desc,$scope.channel.imageUrl).then(function(response){
             if (response.data == 1 ) {
                 var message = 'کانال با موفقیت ذخیره شد';
                 $scope.showToast(message,'bottom',false,4000);
-
+                $state.go("app.home");
             }else{
                 var message = 'خطا در ذخیره سازی کانال جدید';
                 $scope.showToast(message,'bottom',false,4000);

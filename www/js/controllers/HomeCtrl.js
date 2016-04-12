@@ -1,10 +1,14 @@
 ﻿app.controller('HomeCtrl', function (ChannelService, $scope, $state, $ionicPopup, AuthService, AUTH_EVENTS,CONFIG) {
     $scope.CONFIG  = CONFIG;
-    //call after load
-    ChannelService.getChannels().then(function (response) {
-        $scope.channels = response.data;
-    },function(error){
-    });
+
+    $scope.loadChannelsList = function(){
+        ChannelService.getChannels().then(function (response) {
+            $scope.channels = response.data;
+        },function(error){
+        });
+    };
+
+
     $scope.mobileNumber = AuthService.mobileNumber();
     //show message when the response has error
     //events triggered by interceptor by AuthInterceptor
@@ -28,6 +32,9 @@
     $scope.setCurrentMobileNumber = function(mobileNumber) {
         $scope.mobileNumber = mobileNumber;
     };
+
+    //call after load
+    $scope.loadChannelsList();
 
 });
 

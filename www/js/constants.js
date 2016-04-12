@@ -10,6 +10,7 @@
 
     app.constant("CONFIG",{
         title: 'Cafe Kanal',
-        baseAddress : 'http://192.168.177.103:8080'
+        baseAddress : 'http://192.168.177.100:8080',
+        staticBaseAddress : 'http://192.168.177.100:8080/static/'
     });
 
