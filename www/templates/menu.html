@@ -1,4 +1,18 @@
 ﻿<ion-side-menus enable-menu-with-back-views="false"  ng-controller="AuthCtrl">
+    <div class="tabs tabs-balanced tabs-icon-top" ng-show="isAuthenticated()">
+        <a class="tab-item active" ui-sref="app.home">
+            <i class="icon ion-ios-home"></i> Home
+            <ion-nav-view name="home"></ion-nav-view>
+        </a>
+        <a class="tab-item ">
+            <i class="icon ion-ios-chatbubble"></i> Chat
+            <ion-nav-view name="chat"></ion-nav-view>
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-ios-search-strong"></i> Search
+            <ion-nav-view name="search"></ion-nav-view>
+        </a>
+    </div>
     <ion-side-menu-content >
         <ion-nav-bar class="bar-assertive" ng-show="isAuthenticated()">
             <ion-nav-back-button class="no-text">
@@ -7,9 +21,6 @@
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-               <button class="button button-icon button-clear"   ui-sref="app.newChannel" >
-                    <i class="icon ion-plus-round" ></i>
-                </button>
                 <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
             </ion-nav-buttons>
         </ion-nav-bar>     
@@ -37,20 +48,7 @@ Settings
         </ion-content>
     </ion-side-menu>
     
-    	<div class="tabs tabs-balanced tabs-icon-top" ng-show="isAuthenticated()">
-                <a class="tab-item active" ui-sref="app.home">
-                    <i class="icon ion-ios-home"></i> Home
-                    <ion-nav-view name="home"></ion-nav-view>
-                </a>
-                <a class="tab-item ">
-                    <i class="icon ion-ios-chatbubble"></i> Chat
-                    <ion-nav-view name="chat"></ion-nav-view>
-                </a>
-                <a class="tab-item">
-                    <i class="icon ion-ios-search-strong"></i> Search
-                    <ion-nav-view name="search"></ion-nav-view>
-                </a>
-        </div>
+
 
 </ion-side-menus>
 

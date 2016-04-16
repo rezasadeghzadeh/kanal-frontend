@@ -1,5 +1,13 @@
-app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $ionicActionSheet, ionicToast, ImageService, ChannelService,CONFIG) {
+app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $ionicActionSheet
+    , ionicToast, ImageService, ChannelService,CONFIG, $stateParams, $ionicScrollDelegate) {
+    $scope.channelId= $stateParams.channelId;
     $scope.channel = {};
+    $scope.posts = [];
+    var viewScroll;
+    var footerBar;
+    var scroller;
+    var txtInput;
+
     $scope.chooseUploadPhotoMethod = function () {
         $scope.hideSheet = $ionicActionSheet.show({
             buttons: [
@@ -61,13 +69,93 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
         };
     };
 
-    $scope.testFunc = function(){
-        result  = ChannelService.testF();
-        alert(result);
+    $scope.initShowChannelPostsForm = function(){
+        viewScroll = $ionicScrollDelegate.$getByHandle('postScroll');
+        footerBar = document.body.querySelector('#channelPostsView .bar-footer');
+        scroller = document.body.querySelector('#channelPostsView .scroll-content');
+        txtInput = angular.element(footerBar.querySelector('textarea'));
+
+
+        channelId = $stateParams.channelId;
+        ChannelService.getChannelPosts(channelId).then(function(res){
+            if(res.data  != null){
+                $scope.posts = res.data;
+            }
+        },function(err){
+            alert(JSON.stringify(err));
+        });
+
     }
 
     $scope.showToast = function(message, location,stick,time) {
         ionicToast.show(message, location, stick, time);
     }
+
+    function keepKeyboardOpen() {
+        console.log('keepKeyboardOpen');
+        txtInput.one('blur', function () {
+            txtInput[0].focus();
+        });
+    }
+
+    $scope.sendTextPost  = function(){
+        keepKeyboardOpen();
+        var post= {
+                ChannelId : $scope.channelId,
+                Text : $scope.postText,
+                Date : new Date()
+        }
+
+        $scope.postText = '';
+        $scope.posts.push(post);
+        ChannelService.postTextMessage(post.ChannelId,post.Text).then(function(res){
+            console.log(res.data);
+        },function(err){
+            alert("Error in Controller" + JSON.stringify(err));
+            console.log(JSON.stringify(err));
+        });
+    }
+
+
+    $scope.onMessageHold = function(e, itemIndex, message) {
+        console.log('onMessageHold');
+        console.log('message: ' + JSON.stringify(message, null, 2));
+        $ionicActionSheet.show({
+            buttons: [{
+                text: 'Copy Text'
+            }, {
+                text: 'Delete Message'
+            }],
+            buttonClicked: function(index) {
+                switch (index) {
+                    case 0: // Copy Text
+                        //cordova.plugins.clipboard.copy(message.text);
+
+                        break;
+                    case 1: // Delete
+                        // no server side secrets here :~)
+                        $scope.messages.splice(itemIndex, 1);
+                        $timeout(function() {
+                            viewScroll.resize();
+                        }, 0);
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+    };
+
+    // this prob seems weird here but I have reasons for this in my app, secret!
+    $scope.viewProfile = function(msg) {
+        if (msg.userId === $scope.user._id) {
+            // go to your profile
+        } else {
+            // go to other users profile
+        }
+    };
+
+
 
 });

@@ -34,7 +34,13 @@
     };
 
     //call after load
-    $scope.loadChannelsList();
+    $scope.$on('$ionicView.enter', function() {
+        $scope.loadChannelsList();
+    });
+
+    $scope.showChannelPosts = function(channelId){
+        $state.go('app.channelPosts',{'channelId' : channelId});
+    }
 
 });
 

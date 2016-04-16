@@ -1,19 +1,23 @@
 ﻿<ion-view view-title="Cafe Kanal" ng-controller="HomeCtrl">
-    <ion-content>
-            <div class="bar bar-subheader bar-stable static text-center">
-                <strong class="title">Special Channel</strong>
-            </div>
+    <ion-content >
         <div class="im-wrapper">
             <ion-list>
-                <ion-item ng-repeat="channel in channels" class="item-thumbnail-left">
-                    <img src="{{CONFIG.staticBaseAddress}}{{channel.ThumbnailUrl}}">
+                <ion-item ng-repeat="channel in channels" class="item-thumbnail-left" ng-click="showChannelPosts(channel.Id)">
+                        <img src="{{CONFIG.staticBaseAddress}}{{channel.ThumbnailUrl}}">
+                    <h2>{{channel.Id}}</h2>
 
-                    <h2>{{channel.Title}}</h2>
+                        <h2>{{channel.Title}}</h2>
 
-                    <p>{{channel.Description}}</p>
+                        <p>{{channel.Description}}</p>
                 </ion-item>
             </ion-list>
         </div>
     </ion-content>
-
+    <ul id="menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+        <li class="mfb-component__wrap">
+            <a href="#" class="mfb-component__button--main" ui-sref="app.newChannel">
+                <i class="mfb-component__main-icon--resting ion-plus-round"></i>
+            </a>
+        </li>
+    </ul>
 </ion-view>

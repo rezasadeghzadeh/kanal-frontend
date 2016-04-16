@@ -10,6 +10,7 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="lib/intl-tel-input/build/css/intlTelInput.css">
+    <link href="lib/ionic/css/mfb.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -20,6 +21,12 @@
     <script src="lib/angular-messages/angular-messages.min.js"></script>
 	<script src="js/ng-cordova.min.js"></script>
     <script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
+    <script src="lib/ionic/js/mfb.js"></script>
+    <script src="lib/auto-linker/Autolinker.min.js"></script>
+    <script src="lib/angular-moment/moment.min.js"></script>
+    <script src="lib/angular-moment/angular-moment.min.js"></script>
+
+
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -34,6 +41,10 @@
     	<script src="js/services/ChannelService.js"></script>
     <script src="js/services/AuthService.js"></script>
     <script src="js/controllers/AuthCtrl.js"></script>
+    <script src="js/filter/filter.js"></script>
+    <script src="js/directive/directive.js"></script>
+
+
 
 </head>
 <body ng-app="starter">

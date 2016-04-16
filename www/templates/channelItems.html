@@ -1,0 +1,40 @@
+<ion-view id="channelPostsView" view-title="channel Items" ng-controller="ChannelsCtrl" cache-view="false" ng-init="initShowChannelPostsForm()">
+    <ion-content  delegate-handle="postScroll" has-bouncing="true" class="has-header has-footer">
+        <div ng-repeat="post in posts" class="message-wrapper"
+             on-hold="onMessageHold($event, $index, message)">
+
+                <img ng-click="viewProfile(message)" class="profile-pic left"
+                     ng-src="{{post.ThumbnailPic}}" onerror="onProfilePicError(this)" />
+
+                <div class="chat-bubble left">
+
+                    <div class="message" ng-bind-html="post.Text | nl2br" autolinker>
+                    </div>
+
+                    <div class="message-detail">
+                        <span am-time-ago="post.Date"></span>
+                    </div>
+                </div>
+            <div  class="cf"></div>
+        </div>
+
+        </div>
+    </ion-content>
+    <form name="sendMessageForm" ng-submit="sendTextPost()" novalidate>
+
+        <ion-footer-bar class="bar-stable item-input-inset message-footer" style="bottom:50px !important;" keyboard-attach>
+            <label class="item-input-wrapper">
+
+                <textarea class="item-input" ng-model="postText" value="" placeholder="Send a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
+                <input class="item-input" type="hidden" ng-model="channelId"  />
+
+            </label>
+            <div class="footer-btn-wrap">
+                <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                        ng-disabled="!postText || postText === ''">
+                </button>
+            </div>
+        </ion-footer-bar>
+    </form>
+
+</ion-view>
