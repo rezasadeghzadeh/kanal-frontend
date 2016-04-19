@@ -1,5 +1,11 @@
 <ion-view id="channelPostsView" view-title="channel Items" ng-controller="ChannelsCtrl" cache-view="false" ng-init="initShowChannelPostsForm()">
-    <ion-content  delegate-handle="postScroll" has-bouncing="true" class="has-header has-footer">
+    <div class="loader-center" ng-if="!doneLoading">
+        <div class="loader">
+            <i class="icon ion-loading-c"></i>
+        </div>
+    </div>
+    <ion-content  delegate-handle="postScroll" has-bouncing="true" class="has-header has-footer has-tabs">
+
         <div ng-repeat="post in posts" class="message-wrapper"
              on-hold="onMessageHold($event, $index, message)">
 

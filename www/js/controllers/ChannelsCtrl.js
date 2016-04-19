@@ -1,8 +1,9 @@
 app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $ionicActionSheet
-    , ionicToast, ImageService, ChannelService,CONFIG, $stateParams, $ionicScrollDelegate) {
+    , ionicToast, ImageService, ChannelService,CONFIG, $stateParams, $ionicScrollDelegate, $ionicLoading,$timeout) {
     $scope.channelId= $stateParams.channelId;
     $scope.channel = {};
     $scope.posts = [];
+    $scope.doneLoading = false;
     var viewScroll;
     var footerBar;
     var scroller;
@@ -42,10 +43,10 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
                     $scope.channelNameAlreadyExistsMsg="";
                 }else if(response == -1){
                     $scope.channelNameStatusIconClass = 'icon ion-close-circled assertive';
-                    $scope.channelNameAlreadyExistsMsg  =  "خطا در اتصال به سرور";
+                    $scope.channelNameAlreadyExistsMsg  = "Error in Connecting to Server"
                 } else {
                     $scope.channelNameStatusIconClass = 'icon ion-close-circled assertive';
-                    $scope.channelNameAlreadyExistsMsg  = "آدرس کانال قبلا ثبت شده است";
+                    $scope.channelNameAlreadyExistsMsg  = "Sorry, Channel Name Already Exist!"
                 }
             });
         }else{
@@ -57,15 +58,15 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
     $scope.saveNewChannel  = function(){
         ChannelService.saveNewChannel($scope.channel.name,$scope.channel.title,$scope.channel.type,$scope.channel.desc,$scope.channel.imageUrl).then(function(response){
             if (response.data == 1 ) {
-                var message = 'کانال با موفقیت ذخیره شد';
+                var message = "Channel Added Successfully";
                 $scope.showToast(message,'bottom',false,4000);
                 $state.go("app.home");
             }else{
-                var message = 'خطا در ذخیره سازی کانال جدید';
+                var message = "Error in Saving Channel";
                 $scope.showToast(message,'bottom',false,4000);
             }
         }),function(error){
-            $scope.message = 'خطا در ذخیره سازی کانال جدید';
+            $scope.message =  "Error in Saving Channel";
         };
     };
 
@@ -80,6 +81,7 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
         ChannelService.getChannelPosts(channelId).then(function(res){
             if(res.data  != null){
                 $scope.posts = res.data;
+                viewScroll.scrollBottom(true);
             }
         },function(err){
             alert(JSON.stringify(err));
@@ -108,6 +110,11 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
 
         $scope.postText = '';
         $scope.posts.push(post);
+        $timeout(function() {
+            keepKeyboardOpen();
+            viewScroll.scrollBottom(true);
+        }, 0);
+
         ChannelService.postTextMessage(post.ChannelId,post.Text).then(function(res){
             console.log(res.data);
         },function(err){
@@ -116,6 +123,21 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
         });
     }
 
+    $scope.$on('taResize', function(e, ta) {
+        console.log('taResize');
+        if (!ta) return;
+
+        var taHeight = ta[0].offsetHeight;
+        console.log('taHeight: ' + taHeight);
+
+        if (!footerBar) return;
+
+        var newFooterHeight = taHeight + 10;
+        newFooterHeight = (newFooterHeight > 44) ? newFooterHeight : 44;
+
+        footerBar.style.height = newFooterHeight + 'px';
+        scroller.style.bottom = newFooterHeight + 'px';
+    });
 
     $scope.onMessageHold = function(e, itemIndex, message) {
         console.log('onMessageHold');
