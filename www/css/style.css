@@ -443,3 +443,14 @@ a.autolinker {
 .loader .ion-loading-c {
     font-size: 64px;
 }
+
+
+/*overrride theme */
+.item-avatar .item-content .item-image, .item-avatar .item-content>img:first-child, .item-avatar .item-image, .item-avatar-left .item-content .item-image, .item-avatar-left .item-content>img:first-child, .item-avatar-left .item-image, .item-avatar-left>img:first-child, .item-avatar>img:first-child{
+    max-height : 70px !important;
+    max-width: 70px !important;
+}
+.list .item{
+    min-height: 90px !important;
+}
+

@@ -1,7 +1,8 @@
 app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $ionicActionSheet
     , ionicToast, ImageService, ChannelService,CONFIG, $stateParams, $ionicScrollDelegate, $ionicLoading,$timeout) {
-    $scope.channelId= $stateParams.channelId;
+    $scope.channelImageUrl = CONFIG.channelDefaultImageUrl;
     $scope.channel = {};
+    $scope.channelId= $stateParams.channelId;
     $scope.posts = [];
     $scope.doneLoading = false;
     var viewScroll;
@@ -27,6 +28,7 @@ app.controller("ChannelsCtrl", function ($state, $scope, $cordovaFileTransfer, $
             $scope.hideSheet();
             ImageService.handleMediaDialog(type).then(function (imageUrl) {
                 $scope.channel.imageUrl  =  imageUrl;
+                $scope.channelImageUrl = CONFIG.staticBaseAddress + imageUrl;
             }),function(error){
                 console.log("ChannelCrtl error : " + error);
             };
